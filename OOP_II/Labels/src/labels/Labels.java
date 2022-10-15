@@ -40,5 +40,4 @@ public class Labels {
         frame.add(label2, BorderLayout.CENTER);
         frame.add(label3, BorderLayout.PAGE_END);
     }
-    
 }
