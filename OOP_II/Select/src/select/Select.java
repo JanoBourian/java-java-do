@@ -40,5 +40,4 @@ public class Select {
         frame.add(check2, BorderLayout.SOUTH);
         frame.add(check3, BorderLayout.CENTER);
     }
-    
 }
