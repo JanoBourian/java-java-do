@@ -1,11 +1,11 @@
-package textfield;
+package textarea;
 
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 
-public class TextField {
+public class TextArea {
 
     public static void main(String[] args) {
         
@@ -22,19 +22,20 @@ public class TextField {
             }
         });
         
-        JTextField field1 = new JTextField();
-        field1.setText("Text Box 1");
+        JTextArea area1 = new JTextArea();
+        area1.setColumns(10);
+        area1.setText("Text area 1");
         
-        JTextField field2 = new JTextField();
-        field2.setText("Text Box 2");
-        field2.setFont(new java.awt.Font("Tunga", 1, 24));
-        field2.setForeground(new java.awt.Color(255, 51, 51));
+        JTextArea area2 = new JTextArea();
+        area2.setColumns(20);
+        area2.setText("Text area 2");
+        area2.setEditable(false);
         
-        frame.add(field1, BorderLayout.LINE_START);
-        frame.add(field2, BorderLayout.LINE_END);
+        frame.add(area1, BorderLayout.LINE_START);
+        frame.add(area2, BorderLayout.LINE_END);       
         
-        String text = field1.getText();
-        String text2 = field2.getText();
+        String text = area1.getText();
+        String text2 = area2.getText();
         
         System.out.println(text);
         System.out.println(text2);
