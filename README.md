@@ -130,10 +130,108 @@ public class Events {
 }
 ```
 
-```java
-```
+Mouse events and keyboard events
 
 ```java
+package events;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class Events {
+
+    public static void main(String[] args) {
+        JTextField message_box = new JTextField("Label");
+        message_box.setVisible(true);
+        message_box.setSize(50,50);
+        message_box.setLocation(400,400);
+        
+        JButton boton = new JButton("Press here!");
+        boton.setVisible(true);
+        boton.setSize(100,100);
+        boton.setLocation(100,100);
+        
+        JFrame frame = new JFrame("Window!");
+        frame.setLocation(100, 100);
+        frame.setVisible(true);
+        frame.setSize(800,800);
+        frame.add(boton);
+        frame.add(message_box);
+        
+        boton.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                System.out.println("Diste CLick en el Botón");
+            }
+        });
+        
+        message_box.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e){
+                System.out.println(e);
+            }
+        });
+        
+        frame.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                System.out.println("Se ha cerrado la aplicación!");
+                System.exit(0);
+            }
+        });
+    }
+}
+```
+
+Panels
+
+```java
+package gcomponents;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.*;
+
+public class GComponents {
+
+    public static void main(String[] args) {
+        // Frame
+        JFrame frame = new JFrame("Window!");
+        frame.setLocation(200, 200);
+        frame.setVisible(true);
+        frame.setSize(500, 500);
+        
+        frame.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing( WindowEvent e){
+                System.out.println("The window was closed!");
+                System.exit(0);
+            }
+        });
+        
+        // Panels
+        JPanel panel = new javax.swing.JPanel();
+        JPanel panel2 = new javax.swing.JPanel();
+        JPanel panel3 = new javax.swing.JPanel();
+        
+        panel.setBackground(Color.CYAN);
+        panel2.setBackground(Color.MAGENTA);
+        panel3.setBackground(Color.ORANGE);
+        
+        frame.add(panel, BorderLayout.PAGE_START);
+        frame.add(panel2, BorderLayout.CENTER);
+        frame.add(panel3, BorderLayout.PAGE_END);
+    }
+}
 ```
 
 ```java
