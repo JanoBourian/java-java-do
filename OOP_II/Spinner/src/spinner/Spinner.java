@@ -37,5 +37,4 @@ public class Spinner {
         spn1.getValue().toString();
         spn2.getValue().toString();
     }
-    
 }
