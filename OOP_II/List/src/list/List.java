@@ -28,5 +28,4 @@ public class List {
         System.out.println(list1.getSelectedItem().toString());
         System.out.println(list1.getSelectedIndex());
     }
-    
 }
