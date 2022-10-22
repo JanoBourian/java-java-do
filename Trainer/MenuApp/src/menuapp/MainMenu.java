@@ -20,6 +20,14 @@ public class MainMenu {
         frame.setSize(800,800);
         frame.add(boton);
         
+        frame.addWindowListener(new WindowAdapter(){
+            @Override
+            public void windowClosing(WindowEvent e){
+                System.out.println("Se ha cerrado la aplicación!");
+                System.exit(0);
+            }
+        });
+        
         boton.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
