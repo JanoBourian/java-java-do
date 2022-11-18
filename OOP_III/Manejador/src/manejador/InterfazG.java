@@ -27,7 +27,7 @@ public class InterfazG{
         System.out.println("Mensaje de prueba de ejecución");
         frame.setLocation(100,100);
         frame.setVisible(true);
-        frame.setSize(900, 600);
+        
         
         frame.addWindowListener(new WindowAdapter() {
             @Override
