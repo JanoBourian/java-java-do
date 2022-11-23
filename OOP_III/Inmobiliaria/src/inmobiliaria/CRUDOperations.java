@@ -30,7 +30,8 @@ public class CRUDOperations {
                 longitud  + "," +
                 superficie  + ",\n";
         String nameFile = "avaluos";
-        String completePath = System.getProperty("user.dir")+"/"+nameFile+".txt";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        System.out.println("COMPLETE PATH: " + completePath);
         int res = checkLines(completePath);
         FileWriter ubication = null; 
         if (res <= -1){
@@ -38,6 +39,7 @@ public class CRUDOperations {
         }else{
             String completeString = res + "," + stringToSave;
             try{
+                ubication = new FileWriter(completePath, true);
                 BufferedWriter writer = new BufferedWriter(ubication);
                 writer.write(completeString);
                 writer.close();
@@ -51,16 +53,21 @@ public class CRUDOperations {
         
     }
     
-    public void saveInformationAvaluos(){
-        
+    public void saveInformationAvaluos(
+            String fechaAvaluo, 
+            String vigencia,
+            String valor
+        ){
+        String data =  fechaAvaluo +"," +
+            vigencia +"," +
+            valor;
     }
     
     public void saveInformationVentas(){
         
     }
     
-    public int checkLines(String nameFile){
-        String completePath = System.getProperty("user.dir")+"/"+nameFile+".txt";
+    public int checkLines(String completePath){
         File f = new File(completePath);
         int number = 0; 
         if(f.exists()){
@@ -76,14 +83,7 @@ public class CRUDOperations {
                 return -1;
             }
         }else{
-            try{
-                FileWriter ubication = null; 
-                ubication = new FileWriter(completePath, true);
-                return 1;
-            }catch(IOException ex){
-                System.out.println("EXCEPTION: "+ ex.toString());
-                return -1;
-            }
+            return 1;
         }
     }
 }
