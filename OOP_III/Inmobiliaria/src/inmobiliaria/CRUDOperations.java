@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.lang.System.Logger;
 import javax.swing.*;
 
-public class CRUDOperations {
+public class CRUDOperations extends Thread{
     
     public String saveInformationLotes(
             String entidad,
@@ -221,5 +221,15 @@ public class CRUDOperations {
         }else{
             return null;
         }
+    }
+    
+    @Override
+    public void run(){
+        long inicio = System.currentTimeMillis();
+        String[] ventas = getAllVentas();
+        long fin = System.currentTimeMillis();
+        double tiempo = (double) ((fin - inicio)/100);
+        System.out.println("VENTAS: " + ventas);
+        System.out.println("TIEMPO: " + tiempo);
     }
 }

@@ -45,7 +45,7 @@ public class FormRegistroVentas {
         });
         
         lblAvaluo.setText("Avaluo");
-        lblVendedor.setText("NOmbre del vendedor");
+        lblVendedor.setText("Nombre del vendedor");
         btnGuardar.setText("Guardar");
         btnRegresar.setText("Regresar");
         btnLimpiar.setText("Limpiar el formulario");
