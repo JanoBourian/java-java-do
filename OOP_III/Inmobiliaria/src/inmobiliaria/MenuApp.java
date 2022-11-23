@@ -60,6 +60,14 @@ public class MenuApp {
                 goToLotes();
             }
         });
+        
+        element4.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                System.out.println("Diste CLick en el Botón para ir a Lotes");
+                goToAvaluos();
+            }
+        });
     }
     
     public void goToLotes(){
@@ -67,5 +75,8 @@ public class MenuApp {
         form.setForm();
     }
     
-    
+    public void goToAvaluos(){
+        FormRegistroAvaluos form = new FormRegistroAvaluos();
+        form.setForm();
+    }
 }

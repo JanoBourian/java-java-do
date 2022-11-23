@@ -1,29 +1,30 @@
 package inmobiliaria;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
-public class FormRegistroVentas {
-    JFrame frame = new JFrame("Registro de Ventas!");
+public class FormRegistroAvaluos {
+    
+    JFrame frame = new JFrame("Registro de Avalúos!");
     JPanel panel = new javax.swing.JPanel();
     
     //Lote
-    JLabel lblAvaluo = new javax.swing.JLabel();
-    JComboBox txtAvaluo = new javax.swing.JComboBox();
-    
-    // Vendedor
-    JLabel lblVendedor= new javax.swing.JLabel();
-    JTextField txtVendedor = new javax.swing.JTextField();
+    JLabel lblLote = new javax.swing.JLabel();
+    JComboBox txtLote = new javax.swing.JComboBox();    
+    // Fecha avalúo
+    JLabel lblFechaAvaluo= new javax.swing.JLabel();
+    JTextField txtFechaAvaluo = new javax.swing.JTextField();
+    // Vigencia
+    JLabel lblVigencia = new javax.swing.JLabel();
+    JTextField txtVigencia = new javax.swing.JTextField();
+    // Valor
+    JLabel lblValor = new javax.swing.JLabel();
+    JTextField txtValor = new javax.swing.JTextField();
     // Botón guardar
     JButton btnGuardar = new javax.swing.JButton();
     // Botón regresar 
@@ -44,8 +45,10 @@ public class FormRegistroVentas {
             }
         });
         
-        lblAvaluo.setText("Avaluo");
-        lblVendedor.setText("NOmbre del vendedor");
+        lblLote.setText("Lote");
+        lblFechaAvaluo.setText("Fecha Vigencia");
+        lblVigencia.setText("Vigencia");
+        lblValor.setText("Valor");
         btnGuardar.setText("Guardar");
         btnRegresar.setText("Regresar");
         btnLimpiar.setText("Limpiar el formulario");
@@ -74,17 +77,21 @@ public class FormRegistroVentas {
         });
         CRUDOperations options = new CRUDOperations();
         
-        String[] dictionary = options.getAllAvaluos();
+        String[] dictionary = options.getAllLotes();
         // The combobox options
-        txtAvaluo.setModel(new javax.swing.DefaultComboBoxModel(dictionary));
-        txtAvaluo.setVisible(true);
+        txtLote.setModel(new javax.swing.DefaultComboBoxModel(dictionary));
+        txtLote.setVisible(true);
 
         GridLayout acomodo = new GridLayout(6, 2);
         frame.setLayout(acomodo);
-        frame.add(lblAvaluo);
-        frame.add(txtAvaluo);
-        frame.add(lblVendedor);
-        frame.add(txtVendedor);
+        frame.add(lblLote);
+        frame.add(txtLote);
+        frame.add(lblFechaAvaluo);
+        frame.add(txtFechaAvaluo);
+        frame.add(lblVigencia);
+        frame.add(txtVigencia);
+        frame.add(lblValor);
+        frame.add(txtValor);
         frame.add(btnGuardar);
         frame.add(btnRegresar);
         frame.add(btnLimpiar);
@@ -92,13 +99,17 @@ public class FormRegistroVentas {
     
     public void accionGuardar(){
         CRUDOperations operator = new CRUDOperations();
-        int avaluo = txtAvaluo.getSelectedIndex();
-        String vendedor = txtVendedor.getText();
-        String response = operator.saveInformationVentas(avaluo, vendedor);
+        int lote = txtLote.getSelectedIndex();
+        String fechaAvaluo = txtFechaAvaluo.getText();
+        String vigencia = txtVigencia.getText();
+        String valor = txtValor.getText();
+        String response = operator.saveInformationAvaluos(lote, fechaAvaluo, vigencia, valor);
         JOptionPane.showMessageDialog(null, response, "Mensaje", JOptionPane.PLAIN_MESSAGE);
     }
     
     public void limpiarFormulario(){
-        txtVendedor.setText("");
+        txtFechaAvaluo.setText("");
+        txtVigencia.setText("");
+        txtValor.setText("");
     }
 }

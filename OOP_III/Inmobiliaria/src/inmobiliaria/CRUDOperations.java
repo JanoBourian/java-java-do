@@ -29,7 +29,7 @@ public class CRUDOperations {
                 latitud  + "," +
                 longitud  + "," +
                 superficie  + ",\n";
-        String nameFile = "avaluos";
+        String nameFile = "inventario";
         String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
         System.out.println("COMPLETE PATH: " + completePath);
         int res = checkLines(completePath);
@@ -53,18 +53,64 @@ public class CRUDOperations {
         
     }
     
-    public void saveInformationAvaluos(
+    public String saveInformationAvaluos(
+            int lote,
             String fechaAvaluo, 
             String vigencia,
             String valor
         ){
-        String data =  fechaAvaluo +"," +
+        String stringToSave =  lote + "," + fechaAvaluo +"," +
             vigencia +"," +
-            valor;
+            valor + ",\n";
+        
+        String nameFile = "avaluos";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        System.out.println("COMPLETE PATH: " + completePath);
+        int res = checkLines(completePath);
+        FileWriter ubication = null; 
+        if (res <= -1){
+            return "Ocurrió un error en el guardado";
+        }else{
+            String completeString = res + "," + stringToSave;
+            try{
+                ubication = new FileWriter(completePath, true);
+                BufferedWriter writer = new BufferedWriter(ubication);
+                writer.write(completeString);
+                writer.close();
+                return "Guardado Exitoso";
+            }catch(Exception ex){
+                System.out.println("EXCEPTION: "+ ex.toString());
+                return "Ocurrió un error en el guardado";
+            }
+        }
     }
     
-    public void saveInformationVentas(){
+    public String saveInformationVentas(int avaluo,
+            String vendedor
+        ){
+        String stringToSave =  avaluo + "," + 
+            vendedor + ",\n";
         
+        String nameFile = "ventas";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        System.out.println("COMPLETE PATH: " + completePath);
+        int res = checkLines(completePath);
+        FileWriter ubication = null; 
+        if (res <= -1){
+            return "Ocurrió un error en el guardado";
+        }else{
+            String completeString = res + "," + stringToSave;
+            try{
+                ubication = new FileWriter(completePath, true);
+                BufferedWriter writer = new BufferedWriter(ubication);
+                writer.write(completeString);
+                writer.close();
+                return "Guardado Exitoso";
+            }catch(Exception ex){
+                System.out.println("EXCEPTION: "+ ex.toString());
+                return "Ocurrió un error en el guardado";
+            }
+        }
     }
     
     public int checkLines(String completePath){
@@ -84,6 +130,96 @@ public class CRUDOperations {
             }
         }else{
             return 1;
+        }
+    }
+    
+    public String[] getAllLotes(){
+        String nameFile = "inventario";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        File f = new File(completePath);
+        int number = 0;
+        if(f.exists()){
+            try{
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String st;
+                while((st=br.readLine())!= null){
+                    number = number + 1;
+                }
+                System.out.println("NUMBER: " + number);
+                String[] lista = new String[number]; 
+                int i = 0; 
+                br = new BufferedReader(new FileReader(f));
+                while(i < number){
+                    lista[i] = br.readLine();
+                    i++;
+                }
+                return lista;
+            }catch(IOException ioe){
+                System.out.println("ERROR: "+ ioe.toString());
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+    
+    public String[] getAllAvaluos(){
+        String nameFile = "avaluos";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        File f = new File(completePath);
+        int number = 0;
+        if(f.exists()){
+            try{
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String st;
+                while((st=br.readLine())!= null){
+                    number = number + 1;
+                }
+                System.out.println("NUMBER: " + number);
+                String[] lista = new String[number]; 
+                int i = 0; 
+                br = new BufferedReader(new FileReader(f));
+                while(i < number){
+                    lista[i] = br.readLine();
+                    i++;
+                }
+                return lista;
+            }catch(IOException ioe){
+                System.out.println("ERROR: "+ ioe.toString());
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+    
+    public String[] getAllVentas(){
+        String nameFile = "avaluos";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        File f = new File(completePath);
+        int number = 0;
+        if(f.exists()){
+            try{
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String st;
+                while((st=br.readLine())!= null){
+                    number = number + 1;
+                }
+                System.out.println("NUMBER: " + number);
+                String[] lista = new String[number]; 
+                int i = 0; 
+                br = new BufferedReader(new FileReader(f));
+                while(i < number){
+                    lista[i] = br.readLine();
+                    i++;
+                }
+                return lista;
+            }catch(IOException ioe){
+                System.out.println("ERROR: "+ ioe.toString());
+                return null;
+            }
+        }else{
+            return null;
         }
     }
 }

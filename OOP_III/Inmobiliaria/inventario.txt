@@ -1,0 +1,2 @@
+1,CANCÚN,Super Manzana,Manzana,Calle,HOTELERO,150,135,200,
+2,LORETO,Gamboa,167,Lorenzo,RESIDENCIAL,90,45,150,
