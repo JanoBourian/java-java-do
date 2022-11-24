@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.System.Logger;
+import java.util.Arrays;
 import javax.swing.*;
 
 public class CRUDOperations extends Thread{
@@ -88,7 +89,7 @@ public class CRUDOperations extends Thread{
     public String saveInformationVentas(int avaluo,
             String vendedor
         ){
-        String stringToSave =  avaluo + "," + 
+        String stringToSave =  (avaluo+1) + "," + 
             vendedor + ",\n";
         
         String nameFile = "ventas";
@@ -220,6 +221,35 @@ public class CRUDOperations extends Thread{
             }
         }else{
             return null;
+        }
+    }
+    
+    // Search information in a text file
+    public String searchInformation(String pk_lote, String entidad){
+        String nameFile = "ventas";
+        String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+        File f = new File(completePath);
+        if(f.exists()){
+            try{
+                BufferedReader br = new BufferedReader(new FileReader(f));
+                String st;
+                while((st=br.readLine())!= null){
+                    String[] parts = st.split("\\,");
+                    System.out.println(Arrays.asList(parts));
+                    System.out.println(parts[1].getClass());
+                    System.out.println(pk_lote.getClass());
+                    System.out.println(parts[1].equals(pk_lote));
+                    if(parts[1].equals(pk_lote)){
+                        return st;
+                    }
+                }
+                return "No se encontró información con esos parámetros";
+            }catch(IOException ioe){
+                System.out.println("ERROR: "+ ioe.toString());
+                return "Some error!";
+            }
+        }else{
+            return "Ruta o archivo no encontrado";
         }
     }
     

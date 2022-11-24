@@ -96,6 +96,7 @@ public class FormRegistroVentas {
         String vendedor = txtVendedor.getText();
         String response = operator.saveInformationVentas(avaluo, vendedor);
         JOptionPane.showMessageDialog(null, response, "Mensaje", JOptionPane.PLAIN_MESSAGE);
+        operator.start();
     }
     
     public void limpiarFormulario(){
