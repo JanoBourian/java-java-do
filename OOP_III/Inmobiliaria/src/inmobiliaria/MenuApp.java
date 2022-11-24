@@ -39,7 +39,7 @@ public class MenuApp {
     }
     
     public void aparienciaMenu(){
-        element1.setText("Contrucción");
+        element1.setText("Reportes");
         element2.setText("Inmobiliaria");
         element3.setText("Ingresar al formulario para Registrar Lotes");
         element4.setText("Ingresar al formulario para Registrar Avalúos");
