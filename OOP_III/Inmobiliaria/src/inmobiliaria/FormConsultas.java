@@ -45,7 +45,7 @@ public class FormConsultas {
         
         lblLote.setText("Lote (pk)");
         lblEntidad.setText("Entidad");
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Buscar");
         btnRegresar.setText("Regresar");
         btnLimpiar.setText("Limpiar el formulario");
         

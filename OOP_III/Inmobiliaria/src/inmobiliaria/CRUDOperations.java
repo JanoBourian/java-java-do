@@ -232,18 +232,15 @@ public class CRUDOperations extends Thread{
         if(f.exists()){
             try{
                 BufferedReader br = new BufferedReader(new FileReader(f));
+                String answer = "";
                 String st;
                 while((st=br.readLine())!= null){
                     String[] parts = st.split("\\,");
-                    System.out.println(Arrays.asList(parts));
-                    System.out.println(parts[1].getClass());
-                    System.out.println(pk_lote.getClass());
-                    System.out.println(parts[1].equals(pk_lote));
                     if(parts[1].equals(pk_lote)){
-                        return st;
+                        answer = answer + st + "\n";
                     }
                 }
-                return "No se encontró información con esos parámetros";
+                return answer;
             }catch(IOException ioe){
                 System.out.println("ERROR: "+ ioe.toString());
                 return "Some error!";
