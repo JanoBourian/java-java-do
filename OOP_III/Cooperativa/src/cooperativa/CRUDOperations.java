@@ -9,34 +9,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CRUDOperations extends Thread{
-    ArrayList<String[]> altas = new ArrayList<String[]>();
-    int altasTotales = 0;
-    ArrayList<String[]> depositos = new ArrayList<String[]>();
-    int depositosTotales = 0;
-    ArrayList<String[]> retiros = new ArrayList<String[]>();
-    int retirosTotales = 0;
-    ArrayList<String[]>cuentasActuales = new ArrayList<String[]>();
-    int itemsCuentasActuales = 0; 
-    ArrayList<String[]> cuentasPorAgregar = new ArrayList<String[]>();
-    int itemsCuentasPorAgregar = 0;
     
     public void agregarAltas(String cliente, String monto){
-        String valores[] = {cliente, monto};
-        altas.add(valores);
-        altasTotales += 1;
-        System.out.println("ALTAS TOTALES: " + altasTotales);
+
     }
     
     public void agregarDepositos(String cliente, String monto){
-        String valores[] = {cliente, monto};
-        depositos.add(valores);
-        depositosTotales += 1;
+
     }
     
     public void agregarRetiros(String cliente, String monto){
-        String valores[] = {cliente, monto};
-        retiros.add(valores);
-        retirosTotales += 1;
+
     }
     
     @Override
