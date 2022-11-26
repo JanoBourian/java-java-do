@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.*;
 
 public class Deposito {
-    JFrame frame = new JFrame("RETIRAR DINERO");
+    JFrame frame = new JFrame("DEPOSITAR DINERO");
     JPanel panel = new javax.swing.JPanel();
     
     // Número de cliente

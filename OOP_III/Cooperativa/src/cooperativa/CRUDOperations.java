@@ -156,7 +156,8 @@ public class CRUDOperations extends Thread{
             }else{
                 // En caso de no existir creamos un arreglo a guardar y guardamos
                 // pero el monto debe ser positivo 
-                if(montoGeneral>0){
+                float value = new Float(montoGeneral);
+                if(value>0){
                     bigString = bigString + clienteGeneral +","+montoGeneral+",\n";
                     mensajeAdicional += "SE AGREGÓ CORRECTAMENTE\n";
                 }else{
