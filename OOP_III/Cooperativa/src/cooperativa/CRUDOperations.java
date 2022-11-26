@@ -103,6 +103,7 @@ public class CRUDOperations extends Thread{
                 // Ahora ya sabemos las dimensiones
                 elementosActuales += 1;
             }
+            System.out.println("ELEMENTOS ACTUALES: " + elementosActuales);
             // Se construye un arreglo con la información actual
             if(elementosActuales > 0){
                 String[][] elementos = new String[elementosActuales][2];
@@ -110,9 +111,10 @@ public class CRUDOperations extends Thread{
                 br = new BufferedReader(new FileReader(f));
                 while((st=br.readLine())!= null){
                     // Se agrega información 
+                    System.out.println("INTERNOS: " + internos);
                     String[] parts = st.split("\\,");
+                    elementos[internos][0] = parts[0];
                     elementos[internos][1] = parts[1];
-                    elementos[internos][2] = parts[2];
                     internos++;
                 }
                 // En caso de que sí buscamos ccincidencias
@@ -122,6 +124,9 @@ public class CRUDOperations extends Thread{
                 while((st=br.readLine())!= null){
                     // Se agrega información 
                     String[] parts = st.split("\\,");
+                    System.out.println(parts[0]);
+                    System.out.println(parts[1]);
+                    System.out.println(clienteGeneral);
                     if(parts[0].equals(clienteGeneral)){
                         // En caso de que haya coincidencia operamos
                         float val = new Float(parts[1]);
@@ -141,7 +146,7 @@ public class CRUDOperations extends Thread{
                 }
                 // Guardamos lo que hay
                 for(int i = 0; i < elementosActuales; i++){
-                    bigString = bigString + elementos[elementosActuales][0]+","+elementos[elementosActuales][1]+",\n";
+                    bigString = bigString + elementos[i][0]+","+elementos[i][1]+",\n";
                 }
                 // Si no hubo coincidencia guardamos
                 if(coincidencia == 0){
@@ -150,11 +155,16 @@ public class CRUDOperations extends Thread{
                 }
             }else{
                 // En caso de no existir creamos un arreglo a guardar y guardamos
-                bigString = bigString + clienteGeneral +","+montoGeneral+",\n";
-                mensajeAdicional += "SE AGREGÓ CORRECTAMENTE\n";
+                // pero el monto debe ser positivo 
+                if(montoGeneral>0){
+                    bigString = bigString + clienteGeneral +","+montoGeneral+",\n";
+                    mensajeAdicional += "SE AGREGÓ CORRECTAMENTE\n";
+                }else{
+                    mensajeAdicional += "MONTO NEGATIVO NO ES VÁLIDO PARA DAR DE ALTA UNA CUENTA\n";
+                }
             }
             FileWriter ubication = null; 
-            ubication = new FileWriter(completePath, true);
+            ubication = new FileWriter(completePath);
             BufferedWriter writer = new BufferedWriter(ubication);
             writer.write(bigString);
             writer.close();
