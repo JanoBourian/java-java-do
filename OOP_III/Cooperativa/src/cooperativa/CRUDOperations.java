@@ -10,87 +10,161 @@ import java.util.ArrayList;
 
 public class CRUDOperations extends Thread{
     
-    public void agregarAltas(String cliente, String monto){
-
+    // General properties for correct work
+    String clienteGeneral;
+    String montoGeneral;
+    String nameFile = "balance";
+    String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+    File f = new File(completePath);
+    String nuevoMonto = "";
+    String mensajeAdicional = "\n";
+    String bigString = "";
+    
+    public String agregarAltas(String cliente, String monto){
+        try{
+            boolean op = checkFile();
+            if(op){
+                clienteGeneral = cliente;
+                montoGeneral = monto;
+                run();
+                return clienteGeneral+ " ahora tiene: " + nuevoMonto + mensajeAdicional;
+            }else{
+                System.out.println("OCURRIÓ UN ERROR GRAVE!");
+                return "Operación no se pudo realizar, contacte a soporte!";
+            }
+        }catch(Exception ex){
+            System.out.println("EXCEPTION: "+ ex.toString());
+            return "Operación no se pudo realizar, contacte a soporte!";
+        }
     }
     
-    public void agregarDepositos(String cliente, String monto){
-
+    public String agregarDepositos(String cliente, String monto){
+        try{
+            boolean op = checkFile();
+            if(op){
+                clienteGeneral = cliente;
+                montoGeneral = monto;
+                run();
+                return clienteGeneral+ " ahora tiene: " + nuevoMonto + mensajeAdicional;
+            }else{
+                System.out.println("OCURRIÓ UN ERROR GRAVE!");
+                return "Operación no se pudo realizar, contacte a soporte!";
+            }
+        }catch(Exception ex){
+            System.out.println("EXCEPTION: "+ ex.toString());
+            return "Operación no se pudo realizar, contacte a soporte!";
+        }
     }
     
-    public void agregarRetiros(String cliente, String monto){
-
+    public String agregarRetiros(String cliente, String monto){
+        try{
+            boolean op = checkFile();
+            if(op){
+                clienteGeneral = cliente;
+                montoGeneral = "-"+monto;
+                run();
+                return clienteGeneral+ " ahora tiene: " + nuevoMonto + mensajeAdicional;
+            }else{
+                System.out.println("OCURRIÓ UN ERROR GRAVE!");
+                return "Operación no se pudo realizar, contacte a soporte!";
+            }
+        }catch(Exception ex){
+            System.out.println("EXCEPTION: "+ ex.toString());
+            return "Operación no se pudo realizar, contacte a soporte!";
+        }
+    }
+    
+    public boolean checkFile(){
+        // Checar si existe el archivo
+        try{
+            FileWriter ubication = null; 
+            if(! f.exists()){
+                ubication = new FileWriter(completePath, true);
+                return true;
+            }
+            return true;
+        }catch(Exception ex){
+            System.out.println("EXCEPTION: "+ ex.toString());
+            return false;
+        }
     }
     
     @Override
     public void run(){
         try{
-            String nameFile = "balance";
-            String completePath = System.getProperty("user.dir")+"\\"+nameFile+".txt";
+            // Guarda la información 
+            // Abrimos el archivo de texto
             File f = new File(completePath);
-            if(f.exists()){
-                System.out.println("DENTRO DEL ARCHIVO");
-                // Traemos todos los elementos actuales
-                BufferedReader br = new BufferedReader(new FileReader(f));
-                String st;
-                System.out.println("PARTE 1");
-                while((st = br.readLine()) != null){
-                    String[] parts = st.split("\\,");
-                    String valores[] = {parts[0], parts[1]};
-                    cuentasActuales.add(valores);
-                    itemsCuentasActuales += 1;
-                }
-                
-                
-                System.out.println("PARTE 2");
-                // Damos de alta
-                for(int i = 0; i < altasTotales; i++){
-                    for(int j = 0; j< itemsCuentasActuales; j++){
-                        if(altas.get(i)[1].equals(cuentasActuales.get(j)[1])){
-                            altas.get(i)[0] = "XXXXX";
-                            break;
-                        }
-                    }
-                }
-                
-                System.out.println("PARTE 3");
-                for(int i = 0; i < altasTotales; i++){
-                    if(!(altas.get(i)[0].equals("XXXXX"))){
-                        String valores[] = {altas.get(i)[0], altas.get(i)[1]};
-                        cuentasActuales.add(valores);
-                        itemsCuentasActuales += 1;
-                        System.out.println("ITEM CUENTAS TOTALES: " + itemsCuentasActuales);
-                    }
-                }
-                
-                System.out.println("PARTE 4");
-                System.out.println("ITEMSCUENTASACTUALES: "+ itemsCuentasActuales);
-                for(int i = 0; i < itemsCuentasActuales; i++){
-                    System.out.println("VALOR: " + cuentasActuales.get(i)[0] + "-"+ cuentasActuales.get(i)[1]);
-                }
-                
-                // Realizamos los depósitos
-        
-                // Realizamos los retiros
-                
-                // Escribir información
-                FileWriter ubication = null; 
-                ubication = new FileWriter(completePath, true);
-                BufferedWriter writer = new BufferedWriter(ubication);
-                for(int i = 0; i < itemsCuentasActuales ; i++){
-                 writer.write(cuentasActuales.get(i)[0]+ "," + cuentasActuales.get(i)[1] +",\n");
-                }
-                writer.close();
-            }else{
-                FileWriter ubication = new FileWriter(completePath, true);
-                BufferedWriter writer = new BufferedWriter(ubication);
-                writer.close();
+            // Preparamos la información actual 
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            String st;
+            int elementosActuales = 0; 
+            while((st=br.readLine())!= null){
+                // Ahora ya sabemos las dimensiones
+                elementosActuales += 1;
             }
+            // Se construye un arreglo con la información actual
+            if(elementosActuales > 0){
+                String[][] elementos = new String[elementosActuales][2];
+                int internos = 0;
+                br = new BufferedReader(new FileReader(f));
+                while((st=br.readLine())!= null){
+                    // Se agrega información 
+                    String[] parts = st.split("\\,");
+                    elementos[internos][1] = parts[1];
+                    elementos[internos][2] = parts[2];
+                    internos++;
+                }
+                // En caso de que sí buscamos ccincidencias
+                internos = 0;
+                br = new BufferedReader(new FileReader(f));
+                int coincidencia = 0; 
+                while((st=br.readLine())!= null){
+                    // Se agrega información 
+                    String[] parts = st.split("\\,");
+                    if(parts[0].equals(clienteGeneral)){
+                        // En caso de que haya coincidencia operamos
+                        float val = new Float(parts[1]);
+                        float mov = new Float(montoGeneral);
+                        float operacion = val + mov;
+                        if((operacion)>=0){
+                            // Es posible la operación modificamos ese parámetro
+                            elementos[internos][1] = Float.toString(operacion);
+                            nuevoMonto = Float.toString(operacion);
+                        }else{
+                            // No es posible dejamos tal cual
+                            mensajeAdicional += "NO FUE POSIBLE REALIZAR ALGUNA OPERACIÓN\n";
+                        }
+                        coincidencia = 1; 
+                    }
+                    internos++;
+                }
+                // Guardamos lo que hay
+                for(int i = 0; i < elementosActuales; i++){
+                    bigString = bigString + elementos[elementosActuales][0]+","+elementos[elementosActuales][1]+",\n";
+                }
+                // Si no hubo coincidencia guardamos
+                if(coincidencia == 0){
+                    bigString = bigString + clienteGeneral +","+montoGeneral+",\n";
+                    mensajeAdicional += "SE AGREGÓ CORRECTAMENTE\n";
+                }
+            }else{
+                // En caso de no existir creamos un arreglo a guardar y guardamos
+                bigString = bigString + clienteGeneral +","+montoGeneral+",\n";
+                mensajeAdicional += "SE AGREGÓ CORRECTAMENTE\n";
+            }
+            FileWriter ubication = null; 
+            ubication = new FileWriter(completePath, true);
+            BufferedWriter writer = new BufferedWriter(ubication);
+            writer.write(bigString);
+            writer.close();
             
+            // Acaba todo
+            clienteGeneral = "";
+            montoGeneral = ""; 
         }catch(Exception ex){
             System.out.println("EXCEPTION: "+ ex.toString());
         }
     }
-    
     
 }

@@ -40,8 +40,8 @@ public class Deposito {
         });
         
         lblNumeroCliente.setText("Numero de Cliente");
-        lblMontoInicial.setText("Retiro $");
-        btnGuardar.setText("Agregar a Cola de Depósito");
+        lblMontoInicial.setText("Depósito $");
+        btnGuardar.setText("Depositar");
         btnRegresar.setText("Regresar");
         
         btnRegresar.addMouseListener(new MouseAdapter(){
@@ -73,9 +73,14 @@ public class Deposito {
     
     public void accionGuardar(){
         
-        // Información a guardar
+         // Información a guardar
         String numero = txtNumeroCliente.getText();
         String monto = txtMontoInicial.getText();
+        CRUDOperations operator = new CRUDOperations();
+        String mensaje = operator.agregarDepositos(numero, monto);
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.PLAIN_MESSAGE);
+        txtNumeroCliente.setText("");
+        txtMontoInicial.setText("");
         
         
     }

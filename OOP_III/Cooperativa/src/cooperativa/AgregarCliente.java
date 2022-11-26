@@ -77,7 +77,8 @@ public class AgregarCliente {
         String numero = txtNumeroCliente.getText();
         String monto = txtMontoInicial.getText();
         CRUDOperations operator = new CRUDOperations();
-        operator.agregarAltas(numero, monto);
+        String mensaje = operator.agregarAltas(numero, monto);
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.PLAIN_MESSAGE);
         txtNumeroCliente.setText("");
         txtMontoInicial.setText("");
     }

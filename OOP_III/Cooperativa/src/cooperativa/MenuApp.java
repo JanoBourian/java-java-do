@@ -43,7 +43,7 @@ public class MenuApp {
         frame.add(element1);
         frame.add(element2);
         frame.add(element3);
-        frame.add(element4);
+        //frame.add(element4);
         
         element1.addMouseListener(
                 new MouseAdapter(){

@@ -41,7 +41,7 @@ public class Retiro {
         
         lblNumeroCliente.setText("Numero de Cliente");
         lblMontoInicial.setText("Retiro $");
-        btnGuardar.setText("Agregar a Cola de Retiro");
+        btnGuardar.setText("Retirar");
         btnRegresar.setText("Regresar");
         
         btnRegresar.addMouseListener(new MouseAdapter(){
@@ -73,10 +73,13 @@ public class Retiro {
     
     public void accionGuardar(){
         
-        // Información a guardar
+         // Información a guardar
         String numero = txtNumeroCliente.getText();
         String monto = txtMontoInicial.getText();
-        
-        
+        CRUDOperations operator = new CRUDOperations();
+        String mensaje = operator.agregarRetiros(numero, monto);
+        JOptionPane.showMessageDialog(null, mensaje, "Mensaje", JOptionPane.PLAIN_MESSAGE);
+        txtNumeroCliente.setText("");
+        txtMontoInicial.setText("");
     }
 }
